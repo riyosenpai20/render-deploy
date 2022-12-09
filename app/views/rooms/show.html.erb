@@ -1,0 +1,99 @@
+<h1 class="m-3">
+  <%= @room.name %>
+</h1>
+
+<div class="container">
+    <div class="row row-cols-2">
+        <div class="col col-4">
+            <%= render partial: 'rooms' %>
+        </div>
+        <div class="col col-8 ">
+            <div class="container alert-primary">
+                <div class="chat" data-channel-subscribe="room" data-room-id="<%= @room.id %>">
+                    <% @room_messages.each do |room_message| %>
+                        <div class="chat-message-container">
+                            <div class="row no-gutters">
+                                
+
+                                <div class="col">
+                                    <div class="message-content bg-white p-2 rounded m-2">
+                                        <p class="mb-1">
+                                            <%= room_message.message %>
+                                        </p>
+
+                                        <div class="text-end text-secondary">
+                                            <small>
+                                                <%= session[:username] %>
+                                                <%= room_message.user %>
+                                                <%= room_message.created_at %>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+
+                <%= simple_form_for @room_message, remote: true do |form| %>
+                    <div class="input-group">
+                        <%= form.input :user, as: :string,
+                        wrapper: false,
+                        label: false,
+                        input_html: {
+                        class: 'chat-input form-control',
+                        id: 'user',
+                        autocomplete: 'off'
+                        } %>
+                        
+
+                        
+                    </div>
+                    <div class="input-group">
+                      <%= form.input :message, as: :string,
+                        wrapper: false,
+                        label: false,
+                        input_html: {
+                        class: 'chat-input form-control',
+                        id: 'message',
+                        autocomplete: 'off'
+                        } %>
+                    </div>
+                    <%= form.submit "Send", class: 'btn btn-success chat-input' %>
+
+                    <%= form.input :room_id, as: :hidden %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row m-3">
+  
+
+  <div class="col">
+    
+</div>
+
+<div class="d-none" data-role="message-template">
+  <div class="chat-message-container">
+    <div class="row no-gutters">
+
+      <div class="col">
+        <div class="message-content bg-white p-2 rounded m-2">
+          <p class="mb-1" data-role="message-text">
+
+          </p>
+
+          <div class="text-end text-secondary">
+            <small data-role="message-user">
+            </small>
+            <small data-role="message-date">
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

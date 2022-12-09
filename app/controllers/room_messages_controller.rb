@@ -3,9 +3,13 @@ class RoomMessagesController < ApplicationController
     before_action :load_entities
 
   def create
-    @room_message = RoomMessage.create room: @room,
+    # cookies[:username] = params.dig(:room_message, :user)
+    @room_message = RoomMessage.create user: params.dig(:room_message, :user),
+                                       room: @room,
                                        message: params.dig(:room_message, :message)
     RoomChannel.broadcast_to @room, @room_message
+    # session[:username] = params.dig(:room_message, :user)
+
   end
 
   protected
