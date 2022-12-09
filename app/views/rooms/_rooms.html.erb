@@ -9,7 +9,20 @@
     
     <ul class="list-group">
         <% @rooms.each do |room| %>
-            <li class="list-group-item list-group-item-action"><a href="<%= room_path(room) %>" class="text-decoration-none text-center"><%= room.name %></a> <%= link_to "Delete Room", room_path(room), method: :delete %></li>
+            <li class="list-group-item list-group-item-action">
+            <div class="d-flex justify-content-between">
+              <div>
+                <a href="<%= room_path(room) %>" class="text-decoration-none text-center">
+                  <%= room.name %>
+                </a>
+              </div>
+              <div class="">
+                <%= link_to room_path(room), method: :delete do %>
+                  <i class="fa fa-trash text-danger"></i>
+                <% end %>
+              </div>
+            </div>
+            </li>
         <% end %>
     </ul>
   </nav>

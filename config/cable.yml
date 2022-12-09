@@ -1,6 +1,6 @@
 development:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  url: <%= ENV.fetch("REDIS_URL") { "rediss://red-ce9h1eta499e1udil7e0:a1wnxZBqNQUbBAgxrp8r8dyou6lagAQ0@oregon-redis.render.com:6379" } %>
   channel_prefix: render-deploy_development
 
 test:
